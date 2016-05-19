@@ -1,0 +1,20 @@
+{
+    "name": "jdecool/git-profiler-bundle",
+    "description": "Add Git repository informations into Symfony profiler",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jérémy DECOOL",
+            "email": "contact@jdecool.fr"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/symfony": "~2.3|~3.0",
+        "cypresslab/gitelephant": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {"JDecool\\Bundle\\GitProfilerBundle\\": ""}
+    }
+}

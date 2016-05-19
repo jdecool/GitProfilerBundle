@@ -1,0 +1,86 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        <span class="icon"><img src="data:image/png;base64,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" alt=""/></span>
+        <span class="sf-toolbar-value">{{ collector.branch.name }}</span>
+    {% endset %}
+
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            Git infos
+        </div>
+    {% endset %}
+
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': true }) }}
+{% endblock %}
+
+{% block menu %}
+    <span class="label">
+        <span class="icon"><img src="data:image/png;base64,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" alt=""/></span>
+        <strong>Git</strong>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Branch informations</h2>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col" class="key">Key</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>{{ collector.branch.name }}</td>
+            </tr>
+
+            <tr>
+                <td>Reference</td>
+                <td>{{ collector.branch.fullRef }}</td>
+            </tr>
+
+            <tr>
+                <td>SHA1</td>
+                <td>{{ collector.branch.sha }}</td>
+            </tr>
+
+            <tr>
+                <td>Comment</td>
+                <td>{{ collector.branch.comment }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Repository informations</h2>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col" class="key">Key</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% if collector.repository.name is not empty%}
+                <tr>
+                    <td>Name</td>
+                    <td>{{ collector.repository.name }}</td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <td>Path</td>
+                <td>{{ collector.repository.path }}</td>
+            </tr>
+
+            <tr>
+                <td>Status</td>
+                <td>{{ collector.repository.dirty ? 'Dirty' : 'Not dirty' }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

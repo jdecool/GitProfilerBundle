@@ -1,0 +1,7 @@
+services:
+    jdecool.git_collector:
+        class: JDecool\Bundle\GitProfilerBundle\DataCollector\GitCollector
+        public: false
+        arguments: ["%kernel.root_dir%/.."]
+        tags:
+            - { name: data_collector, template: '@JDecoolGitProfiler/data_collector/template.html.twig', id: 'jdecool.git_collector' }
