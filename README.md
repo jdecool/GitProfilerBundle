@@ -30,3 +30,7 @@ public function registerBundles()
 }
 ```
 
+Optionally configure your git path :
+
+```
+
