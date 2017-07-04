@@ -3,6 +3,7 @@
 namespace JDecool\Bundle\GitProfilerBundle\DataCollector;
 
 use GitElephant\Exception\InvalidRepositoryPathException;
+use GitElephant\GitBinary;
 use GitElephant\Repository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
