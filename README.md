@@ -30,7 +30,10 @@ public function registerBundles()
 }
 ```
 
-Optionally configure your git path :
+Your git binary path is discovered using `which git` where supported but you can specifically set the path via config :
 
+```yaml
+j_decool_git_profiler:
+    git_binary_path: /usr/local/bin/git
 ```
 
