@@ -16,7 +16,7 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('j_decool_git_branch_profiler');
         $rootNode
             ->children()
-            ->scalarNode('git_binary_path')->end()
+                ->scalarNode('git_binary_path')->end()
             ->end();
 
         return $treeBuilder;

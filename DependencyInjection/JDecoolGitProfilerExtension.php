@@ -25,8 +25,7 @@ class JDecoolGitProfilerExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        if(array_key_exists('git_binary_path',$config))
-        {
+        if (array_key_exists('git_binary_path', $config)) {
             $container->getDefinition('jdecool.git_collector')
                 ->addArgument($config['git_binary_path']);
         }

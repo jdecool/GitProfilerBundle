@@ -22,15 +22,15 @@ class GitCollector extends DataCollector
      * @param string $rootDir
      * @param string $gitBinaryPath
      */
-    public function __construct($rootDir,$gitBinaryPath=null)
+    public function __construct($rootDir, $gitBinaryPath=null)
     {
         $this->rootDir = realpath($rootDir);
         if (false === $this->rootDir) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid path.', $rootDir));
         }
 
-        if($gitBinaryPath){
-            $this->gitBinaryPath = $gitBinaryPath;
+        $this->gitBinaryPath = $gitBinaryPath;
+        if ($this->gitBinaryPath) {
             if (!file_exists($this->gitBinaryPath)) {
                 throw new \InvalidArgumentException(sprintf('"%s" does not exist.', $gitBinaryPath));
             }
@@ -44,17 +44,15 @@ class GitCollector extends DataCollector
     {
         try {
             $gitBinary=null;
-            if($this->gitBinaryPath){
-                $gitBinary = new GitBinary($this->gitBinaryPath);
-            }
-            $repository = new Repository($this->rootDir,$gitBinary);
+
+            $gitBinary = new GitBinary($this->gitBinaryPath);
+            $repository = new Repository($this->rootDir, $gitBinary);
 
             $this->data = [
                 'repository' => $repository,
                 'branch'     => $repository->getMainBranch(),
             ];
         } catch (InvalidRepositoryPathException $e) {
-
         }
     }
 
