@@ -31,10 +31,8 @@ class GitCollector extends DataCollector
         }
 
         $this->gitBinaryPath = $gitBinaryPath;
-        if ($this->gitBinaryPath) {
-            if (!file_exists($this->gitBinaryPath)) {
-                throw new \InvalidArgumentException(sprintf('"%s" does not exist.', $gitBinaryPath));
-            }
+        if ($this->gitBinaryPath && !file_exists($this->gitBinaryPath)) {
+            throw new \InvalidArgumentException(sprintf('"%s" does not exist.', $gitBinaryPath));
         }
     }
 
