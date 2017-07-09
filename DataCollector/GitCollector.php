@@ -3,6 +3,7 @@
 namespace JDecool\Bundle\GitProfilerBundle\DataCollector;
 
 use GitElephant\Exception\InvalidRepositoryPathException;
+use GitElephant\GitBinary;
 use GitElephant\Repository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,16 +14,25 @@ class GitCollector extends DataCollector
     /** @var string */
     private $rootDir;
 
+    /** @var string */
+    private $gitBinaryPath;
+
     /**
      * Constructor
      *
      * @param string $rootDir
+     * @param string $gitBinaryPath
      */
-    public function __construct($rootDir)
+    public function __construct($rootDir, $gitBinaryPath=null)
     {
         $this->rootDir = realpath($rootDir);
         if (false === $this->rootDir) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid path.', $rootDir));
+        }
+
+        $this->gitBinaryPath = $gitBinaryPath;
+        if ($this->gitBinaryPath && !file_exists($this->gitBinaryPath)) {
+            throw new \InvalidArgumentException(sprintf('"%s" does not exist.', $gitBinaryPath));
         }
     }
 
@@ -32,14 +42,16 @@ class GitCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         try {
-            $repository = new Repository($this->rootDir);
+            $gitBinary=null;
+
+            $gitBinary = new GitBinary($this->gitBinaryPath);
+            $repository = new Repository($this->rootDir, $gitBinary);
 
             $this->data = [
                 'repository' => $repository,
                 'branch'     => $repository->getMainBranch(),
             ];
         } catch (InvalidRepositoryPathException $e) {
-
         }
     }
 
